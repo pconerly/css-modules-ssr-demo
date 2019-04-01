@@ -1,8 +1,9 @@
-const React = require('react')
-const style = require('./text.css')
+const React = require('react');
+const style = require('./text.scss');
+const cn = require('classnames');
 
 const Text = ({ type = 'normal', children }) => (
-  <p className={style.text}>{children}</p>
-)
+  <p className={cn(style.text, style.bold)}>{children}</p>
+);
 
-module.exports = Text
+module.exports = Text;

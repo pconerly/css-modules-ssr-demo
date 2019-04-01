@@ -16,13 +16,16 @@
     "babel-preset-latest": "^6.22.0",
     "babel-preset-react": "^6.22.0",
     "babel-register": "^6.22.0",
+    "classnames": "2.2.6",
     "css-loader": "^0.26.1",
     "css-modules-require-hook": "^4.0.5",
     "ejs": "^2.5.5",
     "express": "^4.14.0",
     "extract-text-webpack-plugin": "^2.0.0-beta",
+    "node-sass": "4.11.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "sass-loader": "7.1.0",
     "style-loader": "^0.13.1",
     "webpack": "2"
   }

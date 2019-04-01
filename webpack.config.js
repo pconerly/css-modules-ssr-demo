@@ -1,39 +1,55 @@
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const path = require('path');
+
+const mylocalIdentName = '[name]__[local]___[hash:base64:5]';
 
 module.exports = {
   entry: './index.js',
   output: {
-    path: './static',
-    filename: 'bundle.js'
+    path: path.join(__dirname, 'static'),
+    filename: 'bundle.js',
   },
   module: {
     rules: [
       {
-        test: /\.css$/,
-        exclude: /node_modules/,
-        loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: [
-            {
-              loader: 'css-loader',
-              query: {
-                modules: true,
-                sourceMap: true,
-                localIdentName: '[name]__[local]___[hash:base64:5]',
-              },
+        test: /\.(scss)$/,
+        use: [
+          {
+            loader: 'style-loader', // inject CSS to page
+          },
+          {
+            loader: 'css-loader', // translates CSS into CommonJS modules
+            options: {
+              modules: true,
+              localIdentName: mylocalIdentName,
             },
-          ],
-        }),
+          },
+          {
+            loader: 'sass-loader', // compiles Sass to CSS
+          },
+        ],
       },
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: 'style-loader', // inject CSS to page
+          },
+          {
+            loader: 'css-loader', // translates CSS into CommonJS modules
+            options: {
+              modules: true,
+              localIdentName: mylocalIdentName,
+            },
+          },
+        ],
+      },
+
       {
         test: /\.js$/,
         loader: 'babel-loader',
         exclude: [/node_modules/],
       },
-    ]
+    ],
   },
   devtool: 'source-map',
-  plugins: [
-    new ExtractTextPlugin({ filename: 'style.css', disable: false, allChunks: true }),
-  ]
-}
+};
